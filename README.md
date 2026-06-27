@@ -120,11 +120,3 @@ graph TD
 8. Merge Branch
 
 ---
-
-## ผู้จัดทำ
-
-**ชื่อผู้จัดทำ:** NUBSIB
-
-**รายวิชา:** Software Architecture
-
-**หัวข้อโครงงาน:** ระบบร้านค้าออนไลน์สำหรับจำหน่ายสกินแคร์ (Skincare E-Commerce System)
