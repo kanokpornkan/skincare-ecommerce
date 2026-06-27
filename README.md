@@ -108,15 +108,3 @@ graph TD
 
 ---
 
-## ขั้นตอนการใช้งาน Git
-
-1. สร้าง GitHub Repository
-2. Clone Repository ด้วย SourceTree
-3. เพิ่มไฟล์โครงงาน
-4. Commit การเปลี่ยนแปลง
-5. Push ขึ้น GitHub
-6. Pull การเปลี่ยนแปลง
-7. สร้าง Branch
-8. Merge Branch
-
----
