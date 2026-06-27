@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skincare Shop</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins','Noto Sans Thai',sans-serif;
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#FAF9F6;
+    color:#333;
+}
+
+header{
+    background:#ffffffdd;
+    backdrop-filter:blur(10px);
+    position:sticky;
+    top:0;
+    z-index:1000;
+    border-bottom:1px solid #ececec;
+}
+
+nav{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+    height:80px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:700;
+    letter-spacing:1px;
+    color:#6E8B74;
+}
+
+.menu{
+    display:flex;
+    gap:35px;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#444;
+    transition:.3s;
+    font-size:15px;
+}
+
+.menu a:hover{
+    color:#6E8B74;
+}
+
+.right{
+    display:flex;
+    gap:20px;
+    align-items:center;
+}
+
+.cart{
+    position:relative;
+    font-size:24px;
+    cursor:pointer;
+}
+
+#cart-count{
+    position:absolute;
+    top:-6px;
+    right:-10px;
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    background:#6E8B74;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:11px;
+}
+
+.login{
+    text-decoration:none;
+    background:#6E8B74;
+    color:white;
+    padding:10px 22px;
+    border-radius:50px;
+    transition:.3s;
+}
+
+.login:hover{
+    background:#58705d;
+}
+
+.hero{
+    width:90%;
+    max-width:1200px;
+    margin:70px auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:60px;
+}
+
+.hero-text{
+    flex:1;
+}
+
+.hero-text h1{
+    font-size:58px;
+    line-height:1.2;
+    margin-bottom:20px;
+    font-weight:700;
+}
+
+.hero-text span{
+    color:#6E8B74;
+}
+
+.hero-text p{
+    color:#666;
+    line-height:1.9;
+    margin-bottom:35px;
+}
+
+.hero-text button{
+    padding:15px 38px;
+    border:none;
+    background:#6E8B74;
+    color:white;
+    border-radius:40px;
+    cursor:pointer;
+    transition:.3s;
+    font-size:15px;
+}
+
+.hero-text button:hover{
+    transform:translateY(-3px);
+}
+
+.hero img{
+    width:500px;
+    border-radius:30px;
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
+}
+
+.search-box{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+}
+
+.search-box input{
+    width:100%;
+    padding:18px 25px;
+    border:1px solid #ddd;
+    border-radius:50px;
+    background:white;
+    outline:none;
+    font-size:15px;
+}
+
+.title{
+    text-align:center;
+    margin:80px 0 40px;
+    font-size:34px;
+    color:#444;
+}
+
+.products{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:30px;
+    margin-bottom:80px;
+}
+
+.card{
+    background:white;
+    border-radius:25px;
+    overflow:hidden;
+    transition:.35s;
+    border:1px solid #eee;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 35px rgba(0,0,0,.08);
+}
+
+.card img{
+    width:100%;
+    height:280px;
+    object-fit:cover;
+}
+
+.card-body{
+    padding:25px;
+}
+
+.card-body h3{
+    margin-bottom:8px;
+    font-size:20px;
+}
+
+.card-body p{
+    color:#777;
+    font-size:14px;
+    line-height:1.7;
+}
+
+.price{
+    margin:20px 0;
+    font-size:24px;
+    font-weight:bold;
+    color:#6E8B74;
+}
+
+.card button{
+    width:100%;
+    padding:13px;
+    border:none;
+    background:#6E8B74;
+    color:white;
+    border-radius:50px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.card button:hover{
+    background:#58705d;
+}
+
+footer{
+    background:white;
+    border-top:1px solid #ececec;
+    padding:60px 0;
+    text-align:center;
+    color:#777;
+}
+
+footer h2{
+    color:#6E8B74;
+    margin-bottom:15px;
+}
+
+footer p{
+    margin-top:10px;
+}
+
+@media(max-width:900px){
+
+.hero{
+flex-direction:column-reverse;
+text-align:center;
+}
+
+.hero img{
+width:100%;
+}
+
+.menu{
+display:none;
+}
+
+.hero-text h1{
+font-size:42px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<nav>
+
+<div class="logo">
+🌿 SkinCare
+</div>
+
+<div class="menu">
+<a href="#">หน้าแรก</a> 
+<a href="#">สินค้า</a>
+<a href="#">โปรโมชั่น</a>
+<a href="#">เกี่ยวกับเรา</a>
+<a href="#">ติดต่อ</a>
+</div>
+
+<div class="right">
+
+<div class="cart">
+🛒
+<div id="cart-count">0</div>
+</div>
+
+<a href="#" class="login">เข้าสู่ระบบ</a>
+
+</div>
+
+</nav>
+
+</header>
+
+<section class="hero">
+
+<div class="hero-text">
+
+<h1>ดูแลผิวของคุณ ให้สวยอย่างเป็นธรรมชาติ 🌿</h1>
+
+<p>
+เลือกซื้อผลิตภัณฑ์สกินแคร์คุณภาพ
+สำหรับทุกสภาพผิว พร้อมโปรโมชั่นสุดพิเศษ
+</p>
+
+<button>เลือกซื้อสินค้า</button>
+
+</div>
+
+<img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800" alt="">
+
+</section>
+
+<div class="search-box">
+
+<input type="text" id="search" placeholder="ค้นหาสกินแคร์...">
+
+</div>
+
+<h2 class="title">สินค้าแนะนำ</h2>
+
+<div class="products" id="product-list">
+
+    <div class="products" id="product-list"></div>
+    <div class="card">
+
+    <img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=700" alt="Serum">
+
+    <div class="card-body">
+
+        <h3>Hydrating Serum</h3>
+
+        <p>เซรั่มเติมความชุ่มชื้น ลดผิวแห้งกร้าน ให้ผิวดูอิ่มน้ำ</p>
+
+        <div class="price">฿490</div>
+
+        <button onclick="addCart()">เพิ่มลงตะกร้า</button>
+
+    </div>
+
+</div>
+
+<div class="card">
+
+    <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=700" alt="Cleanser">
+
+    <div class="card-body">
+
+        <h3>Gentle Cleanser</h3>
+
+        <p>โฟมล้างหน้าสูตรอ่อนโยน ช่วยทำความสะอาดโดยไม่ทำให้ผิวแห้ง</p>
+
+        <div class="price">฿350</div>
+
+        <button onclick="addCart()">เพิ่มลงตะกร้า</button>
+
+    </div>
+
+</div>
+
+<div class="card">
+
+    <img src="https://images.unsplash.com/photo-1617897903246-719242758050?w=700" alt="Moisturizer">
+
+    <div class="card-body">
+
+        <h3>Moisturizer Cream</h3>
+
+        <p>ครีมบำรุงผิวหน้า เนื้อบางเบา ซึมเร็ว ช่วยกักเก็บความชุ่มชื้น</p>
+
+        <div class="price">฿590</div>
+
+        <button onclick="addCart()">เพิ่มลงตะกร้า</button>
+
+    </div>
+
+</div>
+
+<div class="card">
+
+    <img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=700" alt="Toner">
+
+    <div class="card-body">
+
+        <h3>Refreshing Toner</h3>
+
+        <p>โทนเนอร์ช่วยปลอบประโลมผิว ลดความมัน พร้อมเตรียมผิวก่อนบำรุง</p>
+
+        <div class="price">฿420</div>
+
+        <button onclick="addCart()">เพิ่มลงตะกร้า</button>
+
+    </div>
+
+</div>
+
+<div class="card">
+
+    <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=700" alt="Sunscreen">
+
+    <div class="card-body">
+
+        <h3>Daily Sunscreen SPF50+</h3>
+
+        <p>ครีมกันแดดเนื้อบางเบา ปกป้องผิวจากรังสี UVA และ UVB</p>
+
+        <div class="price">฿390</div>
+
+        <button onclick="addCart()">เพิ่มลงตะกร้า</button>
+
+    </div>
+
+</div>
+
+<div class="card">
+
+    <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=700" alt="Mask">
+
+    <div class="card-body">
+
+        <h3>Vitamin Face Mask</h3>
+
+        <p>มาสก์หน้าช่วยฟื้นฟูผิว ให้ผิวดูกระจ่างใสและเนียนนุ่ม</p>
+
+        <div class="price">฿250</div>
+
+        <button onclick="addCart()">เพิ่มลงตะกร้า</button>
+
+    </div>
+
+</div>
+
+</div>
+
+<footer>
+
+<h2>🌿 SkinCare</h2>
+
+<p>
+Simple Skin. Simple Care.
+</p>
+
+<p>
+© 2026 Skincare Shop | All Rights Reserved
+</p>
+
+</footer>
+
+<script>
+
+let cart = 0;
+
+// เพิ่มสินค้าลงตะกร้า
+function addCart() {
+
+    cart++;
+
+    document.getElementById("cart-count").innerHTML = cart;
+
+    showToast("✅ เพิ่มสินค้าลงตะกร้าแล้ว");
+
+}
+
+// ค้นหาสินค้า
+const search = document.getElementById("search");
+
+search.addEventListener("keyup", function () {
+
+    let keyword = this.value.toLowerCase();
+
+    let cards = document.querySelectorAll(".card");
+
+    cards.forEach(card => {
+
+        let name = card.querySelector("h3").innerText.toLowerCase();
+
+        if(name.includes(keyword)){
+            card.style.display="block";
+        }else{
+            card.style.display="none";
+        }
+
+    });
+
+});
+
+// Toast แจ้งเตือน
+function showToast(message){
+
+    const toast=document.createElement("div");
+
+    toast.innerHTML=message;
+
+    toast.style.position="fixed";
+    toast.style.bottom="30px";
+    toast.style.right="30px";
+    toast.style.background="#6E8B74";
+    toast.style.color="white";
+    toast.style.padding="15px 25px";
+    toast.style.borderRadius="50px";
+    toast.style.boxShadow="0 10px 30px rgba(0,0,0,.15)";
+    toast.style.zIndex="9999";
+    toast.style.opacity="0";
+    toast.style.transition=".3s";
+
+    document.body.appendChild(toast);
+
+    setTimeout(()=>{
+        toast.style.opacity="1";
+    },100);
+
+    setTimeout(()=>{
+        toast.style.opacity="0";
+    },2000);
+
+    setTimeout(()=>{
+        toast.remove();
+    },2400);
+
+}
+
+// เลื่อนลงไปยังสินค้าเมื่อกดปุ่ม "เลือกซื้อสินค้า"
+document.querySelector(".hero button").addEventListener("click",()=>{
+
+    document.querySelector(".title").scrollIntoView({
+        behavior:"smooth"
+    });
+
+});
+
+</script>
+
+</body>
+
+</html>

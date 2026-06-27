@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skincare E-commerce - Enterprise System Requirement Specification (SRS)</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: false,
+            theme: 'default',
+            securityLevel: 'loose'
+        });
+    </script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.7; margin: 0; padding: 0; background-color: #f4f6f9; color: #333; scroll-behavior: smooth; }
+        .container { display: flex; max-width: 1600px; margin: 0 auto; min-height: 100vh; }
+        
+        /* 1. ส่วนควบคุมเมนูและสารบัญด้านซ้าย (Sidebar Navigation & TOC) */
+        .sidebar { width: 350px; background-color: #1a252f; color: #fff; padding: 30px 20px; box-sizing: border-box; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+        .sidebar h3 { color: #3498db; margin-top: 0; font-size: 1.4em; letter-spacing: 0.5px; margin-bottom: 5px; }
+        .toc-title { font-size: 0.9em; color: #95a5a6; text-transform: uppercase; letter-spacing: 1px; margin-top: 25px; margin-bottom: 10px; font-weight: bold; }
+        
+        .sidebar-menu { list-style: none; padding: 0; margin: 0; }
+        .sidebar-menu li { margin-bottom: 4px; }
+        .sidebar-menu a { display: block; padding: 10px 15px; border-radius: 6px; font-size: 0.9em; color: #ecf0f1; text-decoration: none; border-left: 3px solid transparent; transition: all 0.2s; }
+        .sidebar-menu a:hover { background-color: #2c3e50; color: #3498db; }
+        .sidebar-menu a.active { background-color: #2c3e50; color: #3498db; font-weight: bold; border-left-color: #3498db; }
+        
+        /* สารบัญระดับรอง (Sub-menu) */
+        .sidebar-menu .sub-item a { padding-left: 30px; font-size: 0.85em; color: #bdc3c7; }
+        
+        /* 2. ส่วนแสดงเนื้อหาเอกสารหลักด้านขวา (Main Content Area) */
+        .main-content { flex: 1; background: #fff; padding: 50px 60px; box-sizing: border-box; box-shadow: 0 0 20px rgba(0,0,0,0.05); }
+        
+        /* การตกแต่งอิลิเมนต์ภายในเนื้อหา Markdown */
+        h1 { color: #2c3e50; font-size: 2em; border-bottom: 3px solid #3498db; padding-bottom: 15px; margin-top: 0; margin-bottom: 30px; }
+        h2 { color: #2c3e50; font-size: 1.35em; margin-top: 40px; margin-bottom: 20px; border-left: 5px solid #3498db; padding-left: 15px; background: #f8fafc; padding-top: 8px; padding-bottom: 8px; }
+        h3 { color: #34495e; font-size: 1.1em; margin-top: 25px; margin-bottom: 10px; }
+        p, li { color: #475569; font-size: 0.95em; text-align: justify; }
+        ul, ol { padding-left: 25px; }
+        li { margin-bottom: 8px; }
+        strong { color: #0f172a; }
+        blockquote { margin: 20px 0; padding: 15px 20px; background-color: #f1f5f9; border-left: 5px solid #475569; font-style: italic; color: #334155; }
+        
+        /* การตกแต่งตารางวิเคราะห์ระบบ */
+        table { width: 100%; border-collapse: collapse; margin: 25px 0; font-size: 0.9em; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        th, td { border: 1px solid #e2e8f0; padding: 12px 16px; text-align: left; }
+        th { background-color: #f1f5f9; color: #1e293b; font-weight: 600; }
+        tr:nth-child(even) { background-color: #f8fafc; }
+        
+        /* ป้ายแสดงสถานะความสำคัญ */
+        .badge-high { background-color: #fee2e2; color: #991b1b; padding: 4px 10px; border-radius: 6px; font-weight: bold; font-size: 0.8em; display: inline-block; }
+        .badge-medium { background-color: #ffedd5; color: #9a3412; padding: 4px 10px; border-radius: 6px; font-weight: bold; font-size: 0.8em; display: inline-block; }
+        
+        /* บล็อกแสดงไดอะแกรม Mermaid ให้จัดกึ่งกลางและอ่านง่าย */
+        .mermaid-box { background: #fdfdfd; padding: 25px; border: 1px solid #e2e8f0; border-radius: 8px; margin: 25px 0; display: flex; justify-content: center; }
+        
+        .footer-badge { background-color: #1a252f; color: #94a3b8; padding: 15px; text-align: center; font-size: 0.8em; border-radius: 6px; margin-top: 50px; border-top: 1px solid #34495e; }
+    </style>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+<script src="Js/mermaid.js"></script>
+<script src="Js/app.js"></script>
+
+    <div class="container">
+        <div class="sidebar">
+            <h3>🧴 SkincareMart</h3>
+            <p style="font-size: 0.8em; color: #94a3b8; margin-top: -5px;">Enterprise Specification v3.0</p>
+            <hr style="border: 0; border-top: 1px solid #34495e; margin: 20px 0;">
+            
+            <div class="toc-title">สารบัญระบบ (Table of Contents)</div>
+            <ul class="sidebar-menu">
+                <li><a href="#topic1" class="menu-link active">1. ภาพรวมขอบเขตโครงการ</a></li>
+                <li><a href="#topic2" class="menu-link">2. การวิเคราะห์สถาปัตยกรรม</a></li>
+                <li class="sub-item"><a href="#sub-topic-2-1" class="menu-link">└ 2.1 Frontend Architecture</a></li>
+                <li class="sub-item"><a href="#sub-topic-2-2" class="menu-link">└ 2.2 Backend Architecture</a></li>
+                <li class="sub-item"><a href="#sub-topic-2-3" class="menu-link">└ 2.3 Database Architecture</a></li>
+                <li><a href="#topic3" class="menu-link">3. ผังสถาปัตยกรรม (Mermaid)</a></li>
+                <li><a href="#topic4" class="menu-link">4. ความต้องการด้านฟังก์ชัน (FR)</a></li>
+                <li><a href="#topic5" class="menu-link">5. ข้อกำหนดเชิงคุณภาพของระบบ (NFR)</a></li>
+                <li><a href="#topic6" class="menu-link">6. หลักการออกแบบซอฟต์แวร์</a></li>
+                <li><a href="#topic7" class="menu-link">7. การออกแบบโครงสร้างฐานข้อมูล</a></li>
+                <li><a href="#topic8" class="menu-link">8. แผนงานกระบวนการตาม SDLC</a></li>
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <div id="markdown-rendered-output"></div>
+            
+            <div class="footer-badge">
+                เอกสารประกอบการสอนวิชา CSI204 ดิจิทัลแพลตฟอร์มสำหรับพัฒนาซอฟต์แวร์ | มหาวิทยาลัยศรีปทุม
+            </div>
+        </div>
+        <div class="mermaid-box">
+    <div id="diagram" class="mermaid"></div>
+    </div>
+    </div>
+
+    <script>
+        const enterpriseMarkdownContent = `
+# เอกสารข้อกำหนดระบบและสถาปัตยกรรมซอฟต์แวร์ฉบับสมบูรณ์ (Enterprise SRS & Architecture Design Document)
+**ชื่อโครงการ:** ดิจิทัลแพลตฟอร์มระบบให้บริการร้านค้าเครื่องสำอางและสกินแคร์ออนไลน์ (SkincareMart E-Commerce Platform)
+
+---
+
+## 1. บทนำและขอบเขตโครงการ (Introduction & Project Scope)
+แพลตฟอร์ม **SkincareMart** พัฒนาขึ้นเพื่อเป็นเครื่องมือดิจิทัลประเภท **Web Platform (E-commerce)** สำหรับกลุ่มธุรกิจเครื่องสำอางและผลิตภัณฑ์ดูแลผิวออนไลน์ โดยมุ่งเน้นการสร้างสถาปัตยกรรมระบบที่ตอบโจทย์ความถูกต้องคงสภาพของธุรกรรม มีการจัดโครงสร้างส่วนประมวลผลอย่างมีระบบ และรองรับการขยายขอบเขตของซอฟต์แวร์ได้ในอนาคต
+
+---
+
+## 2. การวิเคราะห์สถาปัตยกรรมซอฟต์แวร์ (Software Architecture Analysis)
+จากการวิเคราะห์ระบบผ่านไฟล์โครงสร้างจริงในซอฟต์แวร์ปัจจุบันอันประกอบด้วย \`login.php\`, \`register.php\`, \`products.php\` และ \`db.php\` สามารถจำแนกรูปแบบสถาปัตยกรรมออกเป็น 3 ส่วนหลัก (3-Tier Architecture) ตามกรอบแนวคิดวิศวกรรมซอฟต์แวร์ได้ดังนี้:
+
+### 2.1 Frontend Architecture (ส่วนหน้าเว็บและส่วนติดต่อผู้ใช้งาน)
+* **หน้าที่รับผิดชอบ:** จัดการอินเทอร์เฟซแสดงผลลัพธ์ (UI Components) และรับข้อมูลอินพุตจากลูกค้าเพื่อส่งไปประมวลผลต่อ
+* **รูปแบบการออกแบบ:** ประยุกต์หลักการ **UX/UI (Responsive Design & Mobile-First)** ผ่านโครงสร้างไฟล์ HTML5 และ CSS3 เพื่อช่วยให้ลูกค้าร้านสกินแคร์สามารถเข้าถึงระบบได้สัดส่วนจากทุกประเภทอุปกรณ์
+
+### 2.2 Backend Architecture (ส่วนประมวลผลหลักตรรกะทางธุรกิจ)
+* **หน้าที่รับผิดชอบ:** จัดการควบคุมกฎและเงื่อนไขทางธุรกิจ (Business Logic), จัดทำกระบวนการตรวจสอบสิทธิ์ความปลอดภัย และประมวลผลคิวสินค้า
+* **โมดูลในระบบ:** * \`register.php\`: ประมวลผลการตรวจสอบความถูกต้องของข้อมูลผู้สมัครและแฮชรหัสผ่านความปลอดภัย
+    * \`login.php\`: ควบคุมกระบวนการยืนยันสิทธิ์ตัวตน (Authentication) และสร้าง Session ป้องกันความปลอดภัย
+    * \`products.php\`: จัดการประมวลผลคิวสืบค้นสินค้าและตรรกะคำนวณราคาในระบบตะกร้า (Cart Module)
+
+### 2.3 Database Architecture (ส่วนจัดการคลังและจัดเก็บข้อมูล)
+* **หน้าที่รับผิดชอบ:** จัดเก็บและควบคุมความปลอดภัย ความคงสภาพข้อมูล ตลอดจนจัดทำพูลเชื่อมโยงคำสั่งคิวรี
+* **โมดูลในระบบ:** \`db.php\` ทำหน้าที่รับผิดชอบในส่วน **Database Connection Manager** โดยเชื่อมต่อไปยังฐานข้อมูลระบบเชิงสัมพันธ์ (Relational Database SQL) 
+
+---
+
+## 3. แผนผังโครงสร้างสถาปัตยกรรมระบบ (System Architecture Diagram)
+แผนผังเชิงโครงสร้างแสดงเส้นทางการไหลของคำขอ (Request Flow) ระหว่างผู้ใช้, ไฟล์ PHP Backend และเซิร์ฟเวอร์คลังข้อมูล SQL:
+
+<div id="markdown-rendered-output"></div>
+
+<div class="mermaid-box">
+    <div id="diagram" class="mermaid"></div>
+</div>
+
+---
+
+## 4. ข้อกำหนดด้านฟังก์ชันการทำงาน (Functional Requirements)
+ตารางแจกแจงข้อกำหนดความรับผิดชอบของซอฟต์แวร์ตามโครงสร้างโค้ดที่มีอยู่จริง:
+
+| รหัส FR | โมดูลระบบ | คำอธิบายรายละเอียดหน้างานและกฎทางธุรกิจ (Business Logic) | ไฟล์ประมวลผลหลัก | ระดับความสำคัญ |
+| :---: | :--- | :--- | :---: | :---: |
+| **FR-01** | User Registration | สมัครสมาชิกใหม่ ตรวจจับอีเมลซ้ำซ้อน และจัดการแฮชรหัสผ่านความปลอดภัยสูงก่อนนำบันทึก | \`register.php\` | <span class="badge-high">High</span> |
+| **FR-02** | Authentication | เข้าสู่ระบบ ตรวจสอบ Username/Password เทียบตารางฐานข้อมูลและออกใบอนุญาต Session ID | \`login.php\` | <span class="badge-high">High</span> |
+| **FR-03** | Product Catalog | เรียกดูผลิตภัณฑ์สกินแคร์ ดึงรูปภาพ ชื่อผลิตภัณฑ์ ราคา และควบคุมจำนวนสัดส่วนสต็อกคงเหลือ | \`products.php\` | <span class="badge-high">High</span> |
+| **FR-04** | Basket System | บันทึกข้อมูลคิวสินค้าลงตะกร้า คำนวณสรุปค่าราคาสุทธิรวมถึงส่วนลดของผลิตภัณฑ์ตามเงื่อนไข | \`products.php\` | <span class="badge-high">High</span> |
+| **FR-05** | Database Pool | สร้างแกนกลางเชื่อมต่อฐานข้อมูล ป้องกันข้อผิดพลาดคำสั่ง SQL และตัดคอนเนกชันที่ไม่ได้ใช้ | \`db.php\` | <span class="badge-high">High</span> |
+
+---
+
+## 5. ข้อกำหนดเชิงคุณภาพของระบบ (Non-Functional Requirements)
+สถาปัตยกรรมทางซอฟต์แวร์ที่มุ่งเน้นความเป็นเอ็นเตอร์ไพรส์ จำเป็นต้องได้รับการวางแผนเชิงคุณภาพใน 3 มิติหลัก:
+
+* **Security (ความปลอดภัยข้อมูล):** การจัดการป้องกันช่องโหว่ซอฟต์แวร์ เช่น SQL Injection ผ่านระบบไฟล์ \`db.php\` และการเข้ารหัสข้อมูลที่สำคัญก่อนจัดเก็บเสมอ
+* **Scalability & Performance (การรองรับการเติบโต):** ออกแบบวิธีการคิวรีที่มีความเร็ว และวางแผนจัดทำสถาปัตยกรรมกระจายงานด้วย Load Balancer พร้อมรองรับเทคนิค Caching (เช่น Redis) เพื่อช่วยลดภาระงานฐานข้อมูลลงเมื่อทราฟฟิกขึ้นสูง
+* **Availability (ความพร้อมใช้งาน):** วางโครงสร้างระบบจัดเก็บข้อมูลให้มีแผนสำรองข้อมูล (Automated Backup & Recovery System) เพื่อรับประกันความปลอดภัยและการเข้าถึงบริการได้ต่อเนื่อง 24 ชั่วโมง
+
+---
+
+## 6. หลักการออกแบบสถาปัตยกรรมซอฟต์แวร์ที่ประยุกต์ใช้ (Architectural Design Principles)
+โครงสร้างโปรเจกต์ได้รับการควบคุมและจัดหมวดหมู่โค้ดตามแนวทางสากลดังต่อไปนี้:
+1. **Separation of Concerns (SoC):** การแบ่งเลเยอร์หน้าที่ส่วนหน้า (Frontend Interface) และตรรกะประมวลผลหลัก (Backend Layer) ออกจากกันชัดเจน
+2. **Single Responsibility Principle (SRP):** หนึ่งไฟล์รับผิดชอบเพียงเป้าหมายเดียว เช่น \`db.php\` มีบทบาทเรื่องเชื่อมโยงและรันคำสั่งฐานข้อมูลเท่านั้น จะไม่มีการนำโค้ดจัดโครงร่างหน้าเว็บไปเขียนปะปนอยู่ภายใน
+3. **Modularity:** จัดวางโค้ดให้อยู่ในลักษณะโมดูลแยกชิ้น เพื่อให้ทีมผู้พัฒนาสามารถนำไปประกอบกระบวนการ Unit Test ได้ง่ายและไม่เกิดผลกระทบชนกันของโค้ด
+
+---
+
+## 7. การออกแบบโครงสร้างและแบบจำลองฐานข้อมูล (Database Conceptual Design)
+โครงสร้างตารางข้อมูลเชิงสัมพันธ์หลักๆ ที่ระบบเรียกใช้งานผ่านพูลคำสั่งของไฟล์ \`db.php\`:
+
+<blockquote>
+<strong>ตาราง users (ข้อมูลสิทธิ์ผู้ใช้งาน)</strong><br>
+• id (INT, PK, Auto Increment) - รหัสคีย์หลักอ้างอิงประจำตัวผู้ใช้<br>
+• username (VARCHAR) - ชื่อผู้ใช้ที่ใช้ล็อกอินเข้าระบบ<br>
+• password_hash (VARCHAR) - สตริงรหัสผ่านที่ผ่านกระบวนการเข้ารหัสความปลอดภัยแล้ว<br>
+• email (VARCHAR) - ที่อยู่อีเมลติดต่อของผู้ใช้งาน<br>
+• created_at (TIMESTAMP) - บันทึกวันเวลาที่ผู้ใช้งานสมัครสมาชิกเข้ามาในแพลตฟอร์ม
+</blockquote>
+
+<blockquote>
+<strong>ตาราง products (ข้อมูลรายการสต็อกผลิตภัณฑ์สกินแคร์)</strong><br>
+• id (INT, PK, Auto Increment) - รหัสคีย์หลักอ้างอิงประจำตัวผลิตภัณฑ์<br>
+• name (VARCHAR) - ชื่อสินค้าผลิตภัณฑ์สกินแคร์บำรุงผิว<br>
+• description (TEXT) - ข้อมูลรายละเอียดคุณสมบัติ ส่วนผสม และวิธีใช้สินค้าอย่างละเอียด<br>
+• price (DECIMAL) - ข้อมูลมูลค่าราคาขายสินค้าต่อหน่วย<br>
+• stock_quantity (INT) - จำนวนสินค้าที่คงเหลือพร้อมจัดจำหน่ายอยู่ภายในคลังสต็อก<br>
+• image_url (VARCHAR) - ที่อยู่พาธลิงก์ไฟล์รูปภาพผลิตภัณฑ์สกินแคร์สำหรับดึงไปแสดงผล
+</blockquote>
+
+---
+
+## 8. แผนงานกระบวนการตามวงจร SDLC (Software Development Life Cycle)
+โครงการนี้ได้รับการขับเคลื่อนงานพัฒนาเป็นขั้นตอนตามมาตรฐานวงจรชีวิตการพัฒนาซอฟต์แวร์ (SDLC) เพื่อควบคุมคุณภาพและเวลา:
+1. **การวางแผนระบบ (Planning):** ระบุความต้องการ ขอบเขตของร้านค้าสกินแคร์ออนไลน์ และประเมินงบประมาณระยะเวลา
+2. **การวางพิมพ์เขียว (Design):** ออกแบบแผนผังระบบ รูปแบบ UI/UX Wireframe และวางสถาปัตยกรรมแบบจำลองโครงสร้างฐานข้อมูล SQL
+3. **การลงมือโค้ด (Development):** พัฒนาระบบเขียนสคริปต์คำสั่งภาษา PHP แยกโมดูลไฟล์ตามหลักการที่วางแผนไว้
+4. **การทดสอบความถูกต้อง (Testing):** เขียนโค้ดกระบวนการทำ Unit Test และบันทึกประวัติการพัฒนาซอฟต์แวร์ร่วมกันผ่านระบบ Git/Sourcetree
+5. **การขึ้นระบบและบำรุงรักษา (Maintenance):** ติดตั้งแพลตฟอร์มขึ้นสู่ระบบ Cloud เซิร์ฟเวอร์ วางระบบสำรองข้อมูล และคอยติดตามดีบัก Bug Fix ต่างๆ
+        `;
+
+        // 1. นำเนื้อหา Markdown ไปแปลงเป็น HTML และจัดการกรอบครอบโมดูลของ Mermaid ให้เสถียร
+        try {
+    const text = enterpriseMarkdownContent
+        .replace(/:::mermaid/g, '<div class="mermaid-box"><div class="mermaid">')
+        .replace(/:::$/gm, '</div></div>');
+
+    const parsedHTML = marked.parse(text);
+
+    document.getElementById("markdown-rendered-output").innerHTML = parsedHTML;
+
+} catch (e) {
+    console.error(e);
+    alert(e.stack);
+}
+
+        // 3. ผูก ID สำหรับหัวข้อย่อย <h3> ในบทวิเคราะห์
+        const subHeadings = document.querySelectorAll('#markdown-rendered-output h3');
+        subHeadings.forEach((subHeading, index) => {
+            if(index < 3) {
+                subHeading.id = 'sub-topic-2-' + (index + 1);
+            }
+        });
+
+        // 4. สั่งรันชุดวาดรูปของไลบรารี Mermaid แบบ Clean Text
+        mermaid.run({
+            nodes: document.querySelectorAll('.mermaid')
+        });
+
+        // 5. ระบบตรวจจับแถบสีเมนูสารบัญด้านซ้าย
+        const links = document.querySelectorAll('.sidebar-menu a');
+        links.forEach(link => {
+            link.addEventListener('click', function() {
+                links.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
